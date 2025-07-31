@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Gado{% endblock %}
+
+{% block body %}
+    <h1>Create new Gado</h1>
+
+    {{ include('gado/_form.html.twig') }}
+
+    <a href="{{ path('app_gado_index') }}">back to list</a>
+{% endblock %}

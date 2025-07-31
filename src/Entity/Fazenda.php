@@ -15,7 +15,7 @@ class Fazenda
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique: true)]
     private ?string $nome = null;
 
     #[ORM\Column]
@@ -30,9 +30,16 @@ class Fazenda
     #[ORM\ManyToMany(targetEntity: Veterinario::class, inversedBy: 'fazendas')]
     private Collection $veterinarios;
 
+    /**
+     * @var Collection<int, Gado>
+     */
+    #[ORM\OneToMany(targetEntity: Gado::class, mappedBy: 'fazenda')]
+    private Collection $gados;
+
     public function __construct()
     {
         $this->veterinarios = new ArrayCollection();
+        $this->gados = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -96,6 +103,36 @@ class Fazenda
     public function removeVeterinario(Veterinario $veterinario): static
     {
         $this->veterinarios->removeElement($veterinario);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Gado>
+     */
+    public function getGados(): Collection
+    {
+        return $this->gados;
+    }
+
+    public function addGado(Gado $gado): static
+    {
+        if (!$this->gados->contains($gado)) {
+            $this->gados->add($gado);
+            $gado->setFazenda($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGado(Gado $gado): static
+    {
+        if ($this->gados->removeElement($gado)) {
+            // set the owning side to null (unless already changed)
+            if ($gado->getFazenda() === $this) {
+                $gado->setFazenda(null);
+            }
+        }
 
         return $this;
     }

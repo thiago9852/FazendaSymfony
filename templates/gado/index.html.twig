@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gado index{% endblock %}
+
+{% block body %}
+    <h1>Gado index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Codigo</th>
+                <th>Peso</th>
+                <th>Racao</th>
+                <th>Leite</th>
+                <th>Nascimento</th>
+                <th>Abate</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for gado in gados %}
+            <tr>
+                <td>{{ gado.id }}</td>
+                <td>{{ gado.codigo }}</td>
+                <td>{{ gado.peso }}</td>
+                <td>{{ gado.racao }}</td>
+                <td>{{ gado.leite }}</td>
+                <td>{{ gado.nascimento ? gado.nascimento|date('Y-m-d') : '' }}</td>
+                <td>{{ gado.abate ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_gado_show', {'id': gado.id}) }}">show</a>
+                    <a href="{{ path('app_gado_edit', {'id': gado.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_gado_new') }}">Create new</a>
+{% endblock %}
