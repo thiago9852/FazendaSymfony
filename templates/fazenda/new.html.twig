@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Fazenda{% endblock %}
+
+{% block body %}
+    <h1>Create new Fazenda</h1>
+
+    {{ include('fazenda/_form.html.twig') }}
+
+    <a href="{{ path('app_fazenda_index') }}">back to list</a>
+{% endblock %}

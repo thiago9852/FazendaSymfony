@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\VeterinarioRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: VeterinarioRepository::class)]
@@ -18,6 +20,17 @@ class Veterinario
 
     #[ORM\Column(length: 255, unique: true)]
     private ?string $crmv = null;
+
+    /**
+     * @var Collection<int, Fazenda>
+     */
+    #[ORM\ManyToMany(targetEntity: Fazenda::class, mappedBy: 'veterinarios')]
+    private Collection $fazendas;
+
+    public function __construct()
+    {
+        $this->fazendas = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -44,6 +57,33 @@ class Veterinario
     public function setCrmv(string $crmv): static
     {
         $this->crmv = $crmv;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Fazenda>
+     */
+    public function getFazendas(): Collection
+    {
+        return $this->fazendas;
+    }
+
+    public function addFazenda(Fazenda $fazenda): static
+    {
+        if (!$this->fazendas->contains($fazenda)) {
+            $this->fazendas->add($fazenda);
+            $fazenda->addVeterinario($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFazenda(Fazenda $fazenda): static
+    {
+        if ($this->fazendas->removeElement($fazenda)) {
+            $fazenda->removeVeterinario($this);
+        }
 
         return $this;
     }
