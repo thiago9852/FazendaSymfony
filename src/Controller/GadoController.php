@@ -6,6 +6,7 @@ use App\Entity\Gado;
 use App\Form\GadoType;
 use App\Repository\GadoRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,10 +16,21 @@ use Symfony\Component\Routing\Attribute\Route;
 final class GadoController extends AbstractController
 {
     #[Route(name: 'app_gado_index', methods: ['GET'])]
-    public function index(GadoRepository $gadoRepository): Response
-    {
+    public function index(
+        GadoRepository $gadoRepository,
+        Request $request,
+        PaginatorInterface $paginator
+    ): Response {
+
+        $gados = $gadoRepository->findBy(['id' => 'DESC']);
+        $pagination = $paginator->paginate(
+            $gados,
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 10)
+        );
+
         return $this->render('gado/index.html.twig', [
-            'gados' => $gadoRepository->findAll(),
+            'pagination' => $pagination,
         ]);
     }
 

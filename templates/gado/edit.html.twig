@@ -1,13 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Gado{% endblock %}
-
 {% block body %}
-    <h1>Edit Gado</h1>
 
-    {{ include('gado/_form.html.twig', {'button_label': 'Update'}) }}
+    <div class="container">
+        <div class="fz-container-titulo">
+            <h5 class="fz-titulo">Atualizar Animal</h5>
+        </div>
 
-    <a href="{{ path('app_gado_index') }}">back to list</a>
+        {{ include('gado/_form.html.twig', {'button_label': 'Atualizar'}) }}
 
-    {{ include('gado/_delete_form.html.twig') }}
+        {{ include('gado/_delete_form.html.twig') }}
+    </div>
+
 {% endblock %}

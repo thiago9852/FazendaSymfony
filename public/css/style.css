@@ -1,0 +1,42 @@
+/* CSS HEX
+--tiffany-blue: #9ad5ceff;
+--mint-green: #c6e7e3ff;
+--azure-web: #e2f3f1ff;
+--mint-cream: #f1f9f8ff;
+--white: #fcfcfcff;
+*/
+
+body {
+    background: #FCFCFCFF;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/* navbar css */
+.fz-nav-bg {
+    background: #F1F9F8;
+    margin-bottom: 35px;
+}
+
+.fz-nav-bg img {
+    width: 65px;
+    height: auto;
+}
+
+/* footer cs */
+.fz-footer {
+    background: #E2F3F1;
+    margin-top: 15px;
+}
+
+.fz-container-titulo {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.fz-titulo {
+    padding-left: 10px;
+    color: #343a40;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-left: 5px solid #9AD5CE;
+}

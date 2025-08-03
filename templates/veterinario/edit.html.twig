@@ -1,13 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Veterinario{% endblock %}
-
 {% block body %}
-    <h1>Edit Veterinario</h1>
 
-    {{ include('veterinario/_form.html.twig', {'button_label': 'Update'}) }}
+    <div class="container">
 
-    <a href="{{ path('app_veterinario_index') }}">back to list</a>
+        <div class="fz-container-titulo">
+            <h5 class="fz-titulo">Atualizar Veterinário</h5>
+        </div>
 
-    {{ include('veterinario/_delete_form.html.twig') }}
+        {{ include('veterinario/_form.html.twig', {'button_label': 'Atualizar'}) }}
+
+        {{ include('veterinario/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

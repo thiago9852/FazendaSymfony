@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\GadoRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: GadoRepository::class)]
 class Gado
@@ -26,6 +27,7 @@ class Gado
     #[ORM\Column]
     private ?float $leite = null;
 
+    #[Assert\LessThanOrEqual('today', message: 'A data de nascimento não pode ser futura.')]
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTime $nascimento = null;
 
